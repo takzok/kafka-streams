@@ -26,7 +26,7 @@ public class KafkaStreamsWordCount {
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
     props.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-application");
-    props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9192");
     props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
     props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
 
@@ -35,6 +35,7 @@ public class KafkaStreamsWordCount {
     props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
     logger.log(Level.INFO,"properties configuration finished.");
+    printProps(props);
 
     StreamsBuilder builder = new StreamsBuilder();
     KStream<String, String> textLines = builder.stream("TextLines");
@@ -63,5 +64,12 @@ public class KafkaStreamsWordCount {
       System.exit(1);
     }
     System.exit(0);
+  }
+
+  public static void printProps( Properties props ) {
+    for ( Object key: props.keySet() ) {
+      Object value = props.get( key );
+      logger.log(Level.INFO, key + ": " + value);
+    }
   }
 }
