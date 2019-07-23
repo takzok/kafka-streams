@@ -15,17 +15,31 @@ services:
     environment:
       HOSTNAME_COMMAND: "hostname -i"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: OUTSIDE://:9092,INSIDE://:9192
-      KAFKA_ADVERTISED_LISTENERS: OUTSIDE://127.0.0.1:9092,INSIDE://_{HOSTNAME_COMMAND}:9192
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: OUTSIDE:PLAINTEXT,INSIDE:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_LISTENERS: OUTSIDE://:9092,PLAINTEXT://:9192
+      KAFKA_ADVERTISED_LISTENERS: OUTSIDE://127.0.0.1:9092,PLAINTEXT://_{HOSTNAME_COMMAND}:9192
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: OUTSIDE:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_NUM_PARTITIONS: 3
       KAFKA_DEFAULT_REPLICATION_FACTOR: 1
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_CREATE_TOPICS: "TextLines:1:1,WordWithCounts:1:1"
+      KAFKA_CREATE_TOPICS: "TextLines:1:1,WordWithCounts:1:1,play-events:1:1,play-events-per-session:1:1"
     volumes:
       - ./volume/kafka/:/var/run/docker.sock
+  schema-registr:
+    image: confluentinc/cp-schema-registry
+    links:
+      - zookeeper
+      - kafka
+    ports:
+      - 8081:8081
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      #      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
+      SCHEMA_REGISTRY_LISTENERS: http://localhost:8081
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9192
+    extra_hosts:
+      - "moby:127.0.0.1"
   postgres:
     image: postgres:11.4
     restart: always
