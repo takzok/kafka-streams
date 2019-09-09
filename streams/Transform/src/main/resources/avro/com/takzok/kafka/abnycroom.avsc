@@ -1,0 +1,21 @@
+{"namespace": "com.takzok.kafka.avro",
+ "type": "record",
+ "name": "AirBnbNYCRoom",
+ "fields": [
+     {"name": "id", "type": "integer"},
+     {"name": "name", "type": "string"},
+     {"name": "host_id", "type": "integer"},
+     {"name": "neighbourhood_group", "type": "string"},
+     {"name": "neighbourhood", "type": "string"},
+     {"name": "latitude", "type": "string"},
+     {"name": "longitude", "type": "string"},
+     {"name": "room_type", "type": "string"},
+     {"name": "price", "type": "double"},
+     {"name": "minumun_nights", "type": "integer"},
+     {"name": "number_if_reviews", "type": "integer"},
+     {"name": "last_review", "type": "string"},
+     {"name": "reviews_per_month", "type": "double"},
+     {"name": "calculated_host_listings_count", "type": "integer"},
+     {"name": "availability_365", "type": "integer"},
+ ]
+}

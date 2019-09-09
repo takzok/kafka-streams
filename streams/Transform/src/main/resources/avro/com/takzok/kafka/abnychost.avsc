@@ -1,0 +1,8 @@
+{"namespace": "com.takzok.kafka.avro",
+ "type": "record",
+ "name": "AirBnbNYCHost",
+ "fields": [
+     {"name": "host_id", "type": "integer"},
+     {"name": "host_name", "type": "string"},
+ ]
+}
