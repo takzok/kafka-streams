@@ -1,0 +1,23 @@
+# get all subjects
+GET http://localhost:8081/subjects
+Accept: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+
+###
+
+# get schema version
+GET http://localhost:8081/subjects/NYCHosts-value/versions
+Accept: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+
+###
+
+# get subject detail
+GET http://localhost:8081/subjects/NYCHosts-value/versions/1
+Accept: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+
+###
+
+# delete subject
+DELETE http://localhost:8081/subjects/NYCHosts-value
+Accept: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+
+###
