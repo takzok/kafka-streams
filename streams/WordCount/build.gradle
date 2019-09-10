@@ -13,7 +13,7 @@ plugins {
     // Apply the application plugin to add support for building an application
     id 'application'
 
-    id 'com.bmuschko.docker-java-application' version '4.10.0'
+//    id 'com.bmuschko.docker-java-application' version '4.10.0'
 }
 
 // Define the main class for the application
@@ -41,13 +41,13 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-docker {
-    javaApplication {
-        baseImage = 'java:openjdk-8-jre'
-        tag = 'takzok/word-count:latest'
-        ports = []
-    }
-}
+// docker {
+//     javaApplication {
+//         baseImage = 'java:openjdk-8-jre'
+//         tag = 'takzok/word-count:latest'
+//         ports = []
+//     }
+// }
 
 //jar configuration
 jar {
